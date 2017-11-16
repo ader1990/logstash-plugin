@@ -6,6 +6,18 @@ pipeline {
     
   }
   stages {
+    stage('Build') {
+       steps {
+         sh './tools/build.sh'
+       }
+       post {
+         success {
+           archiveArtifacts 'target/*.hpi,target/*.jpi'
+           
+         }
+         
+       }
+     }
     stage('Test') {
       steps {
          sh 'echo 1'
