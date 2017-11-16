@@ -25,7 +25,7 @@ pipeline {
       post {
         always {
           junit '**/surefire-reports/**/*.xml'
-          nunit 'nunit_tests/nunit-tests.xml'
+          nunit(testResultsPattern: 'nunit_tests/nunit-tests.xml')
           
         }
         
