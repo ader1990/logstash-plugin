@@ -7,26 +7,25 @@ pipeline {
   }
   stages {
     stage('Build') {
-       steps {
-         sh './tools/build.sh'
-       }
-       post {
-         success {
-           archiveArtifacts 'target/*.hpi,target/*.jpi'
-           
-         }
-         
-       }
-     }
+      steps {
+        sh './tools/build.sh'
+      }
+      post {
+        success {
+          archiveArtifacts 'target/*.hpi,target/*.jpi'
+          
+        }
+        
+      }
+    }
     stage('Test') {
       steps {
-         sh 'echo 1'
+        sh './tools/test.sh'
       }
       post {
         always {
           junit '**/surefire-reports/**/*.xml'
           nunit 'nunit_tests/nunit-tests.xml'
-          archiveArtifacts '**/surefire-reports/**/*.xml'
           
         }
         
