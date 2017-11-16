@@ -7,6 +7,9 @@ pipeline {
   }
   stages {
     stage('Test') {
+      steps {
+         sh 'echo 1'
+      }
       post {
         always {
           junit '**/surefire-reports/**/*.xml'
