@@ -8,6 +8,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        dir('subdir') {
+            withCredentials([file(credentialsId: 'secretfile', variable: 'FILE')]) {
+              sh 'cat $FILE'
+            }
+        }
         sh './tools/build.sh'
       }
       post {
@@ -19,11 +24,7 @@ pipeline {
       }
     }
     stage('Test') {      
-      steps {dir('subdir') {
-        withCredentials([file(credentialsId: 'secretfile', variable: 'FILE')]) {
-          sh 'cat $FILE'
-        }
-      }
+      steps {
         sh './tools/test.sh'
       }
       post {
