@@ -18,8 +18,12 @@ pipeline {
         
       }
     }
-    stage('Test') {
-      steps {
+    stage('Test') {      
+      steps {dir('subdir') {
+        withCredentials([file(credentialsId: 'secretfile', variable: 'FILE')]) {
+          sh 'cat $FILE'
+        }
+      }
         sh './tools/test.sh'
       }
       post {
