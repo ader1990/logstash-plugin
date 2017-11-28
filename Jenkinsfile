@@ -8,12 +8,19 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        dir('subdir') {
-            withCredentials([file(credentialsId: 'secretfile', variable: 'FILE')]) {
-              sh 'cat $FILE'
-            }
+        dir(path: 'subdir') {
+          withCredentials(bindings: [file(credentialsId: 'secretfile', variable: 'FILE')]) {
+            sh 'cat $FILE'
+          }
+          
         }
+        
         sh './tools/build.sh'
+        ansiColor(colorMapName: 'XTerm') {
+          sh '''echo \'1\'
+echo $(test1)'''
+        }
+        
       }
       post {
         success {
@@ -23,7 +30,7 @@ pipeline {
         
       }
     }
-    stage('Test') {      
+    stage('Test') {
       steps {
         sh './tools/test.sh'
       }
