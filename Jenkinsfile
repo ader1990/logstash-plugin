@@ -8,14 +8,6 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        dir(path: 'subdir') {
-          withCredentials(bindings: [file(credentialsId: 'secretfile', variable: 'FILE')]) {
-            sh 'cat $FILE'
-          }
-          
-        }
-        
-        sh './tools/build.sh'
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
 echo $(test1)'''
