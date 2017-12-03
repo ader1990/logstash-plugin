@@ -13,6 +13,7 @@ pipeline {
 echo $(test1)'''
         }
         
+        input(message: 'test', id: '1', ok: '1')
       }
       post {
         success {
