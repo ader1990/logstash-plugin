@@ -1,3 +1,9 @@
+#!/usr/bin/env groovy
+
+def PowerShellWrapper(psCmd) {
+    bat "powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command \"\$ErrorActionPreference='Stop';[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$psCmd;EXIT \$global:LastExitCode\""
+}
+
 pipeline {
   agent {
     docker {
@@ -8,6 +14,10 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        PowerShellWrapper('''
+        echo 1
+        '''
+        )
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
 echo $(test1)'''
