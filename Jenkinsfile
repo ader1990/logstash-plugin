@@ -18,7 +18,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo 1'
+        sh 'echo 12'
         
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
