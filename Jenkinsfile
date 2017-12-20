@@ -14,10 +14,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        PowerShellWrapper('''
-        echo 1
-        '''
-        )
+        unstash 'kernel_version_ini'
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
 echo $(test1)'''
