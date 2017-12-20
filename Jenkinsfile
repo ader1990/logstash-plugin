@@ -5,6 +5,11 @@ def PowerShellWrapper(psCmd) {
 }
 
 pipeline {
+    options {
+        overrideIndexTriggers(false)
+        timeout(time: 1, unit: 'HOURS')
+        timestamps()
+    }
   agent {
     docker {
       image 'maven:3-alpine'
@@ -14,12 +19,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        try {
-            sh 'exit 1'
-        }
-        catch (exc) {
-            echo 'Something failed, I should sound the klaxons!'
-        }
+        sh 'echo 1'
+        
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
 echo $(test1)'''
