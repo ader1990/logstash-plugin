@@ -14,11 +14,13 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-          try {
-            unstash 'kernel_version_ini'
-          } catch {
-            echo "1"
-          }
+        try {
+            sh 'exit 1'
+        }
+        catch (exc) {
+            echo 'Something failed, I should sound the klaxons!'
+            throw
+        }
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
 echo $(test1)'''
