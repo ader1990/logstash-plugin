@@ -6,7 +6,6 @@ def PowerShellWrapper(psCmd) {
 
 pipeline {
     options {
-        overrideIndexTriggers(false)
         timeout(time: 1, unit: 'HOURS')
         timestamps()
     }
