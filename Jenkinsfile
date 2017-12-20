@@ -14,7 +14,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        unstash 'kernel_version_ini'
+          try {
+            unstash 'kernel_version_ini'
+          } catch {
+            echo "1"
+          }
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
 echo $(test1)'''
