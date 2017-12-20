@@ -19,7 +19,6 @@ pipeline {
         }
         catch (exc) {
             echo 'Something failed, I should sound the klaxons!'
-            throw
         }
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
