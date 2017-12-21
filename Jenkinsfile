@@ -19,7 +19,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo 124'
+          sh 'echo ${GIT_LOCAL_BRANCH}'
+          sh "echo ${env.GIT_LOCAL_BRANCH}"
         
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
