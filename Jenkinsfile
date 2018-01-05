@@ -5,6 +5,11 @@ def PowerShellWrapper(psCmd) {
 }
 
 pipeline {
+    parameters {
+        string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
+        // choices are newline separated
+        choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
+    }
     options {
         overrideIndexTriggers(false)
         timeout(time: 1, unit: 'HOURS')
@@ -21,6 +26,7 @@ pipeline {
             parallel {
                 stage('Branch A') {
                     steps {
+                        echo env.REGION
                         echo "On Branch A"
                     }
                 }
