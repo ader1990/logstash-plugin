@@ -6,7 +6,7 @@ def PowerShellWrapper(psCmd) {
 
 pipeline {
     parameters {        
-        file(description: 'What environment?', name: 'hello')
+        file(description: 'What environment?', name: 'HELLO')
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
         // choices are newline separated
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
@@ -16,13 +16,17 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
         timestamps()
     }
-  agent {
-    docker {
-      image 'maven:3-alpine'
+  agent { 
+      node {
+      label 'meta_slave'
     }
-    
   }
   stages {
+    stage('SStage') {
+        steps {
+           sh "cat $HELLO"
+        }
+    }  
     stage('Parallel Stage') {
             parallel {
                 stage('Branch A') {
