@@ -6,6 +6,7 @@ def PowerShellWrapper(psCmd) {
 
 pipeline {
     parameters {
+        file(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
         // choices are newline separated
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
@@ -22,19 +23,6 @@ pipeline {
     
   }
   stages {
-    stage("upload") {
-        steps {
-            def inputFile = input message: 'Upload file', parameters: [file(name: 'data.zip')]
-        new hudson.FilePath(new File("$workspace/data.zip")).copyFrom(inputFile)
-            inputFile.delete()
-        }
-    }
-    stage("checkout") {
-        steps {
-            echo fileExists('data.zip').toString()
-        }
-
-    }
     stage('Parallel Stage') {
             parallel {
                 stage('Branch A') {
