@@ -6,7 +6,7 @@ def PowerShellWrapper(psCmd) {
 
 pipeline {
     parameters {        
-        file(description: 'What environment?', name: 'HELLO', fileLocation: "test/myfile.zip")
+        file(description: 'What environment?', name: 'HELLO', file: "test/myfile.zip")
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
         // choices are newline separated
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
