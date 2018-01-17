@@ -24,6 +24,7 @@ pipeline {
   stages {
     stage('SStage') {
         steps {
+           sh "ls $WORKSPACE"
            sh "cat $HELLO"
         }
     }  
