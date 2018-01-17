@@ -23,12 +23,16 @@ pipeline {
   }
   stages {
     stage("upload") {
-        def inputFile = input message: 'Upload file', parameters: [file(name: 'data.zip')]
+        steps {
+            def inputFile = input message: 'Upload file', parameters: [file(name: 'data.zip')]
         new hudson.FilePath(new File("$workspace/data.zip")).copyFrom(inputFile)
-        inputFile.delete()
+            inputFile.delete()
+        }
     }
     stage("checkout") {
-        echo fileExists('data.zip').toString()
+        steps {
+            echo fileExists('data.zip').toString()
+        }
 
     }
     stage('Parallel Stage') {
