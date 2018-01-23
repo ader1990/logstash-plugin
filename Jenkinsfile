@@ -20,11 +20,13 @@ pipeline {
       label 'meta_slave'
     }
   }
+  
   stages{
     stage('SStage') {
         agent{
       node {
       label 'hyper-v'
+    }
     }
         steps {
            powershell "ls $WORKSPACE"
