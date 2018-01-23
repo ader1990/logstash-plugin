@@ -30,6 +30,12 @@ pipeline {
     }
         steps {
            powershell "ls $WORKSPACE"
+            powershell '''
+            while ($true) {
+                Start-Sleep 1
+                Write-Host (Get-Date)
+            }
+            '''
            
         }
     }
