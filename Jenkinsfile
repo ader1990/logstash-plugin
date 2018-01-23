@@ -22,6 +22,7 @@ pipeline {
   }
   
   stages{
+      stage('validation') {
        parallel {
     stage('SStage') {
         agent{
@@ -61,7 +62,7 @@ pipeline {
             '''
            
         }
-    }
+           }}
        }
     
     stage('Test') {
