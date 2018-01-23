@@ -31,7 +31,9 @@ pipeline {
         steps {
            powershell "ls $WORKSPACE"
             powershell '''
-            while ($true) {
+            $max=50
+            while ($max -gt 0) {
+                $max = $max -1
                 Start-Sleep 1
                 Write-Host (Get-Date)
             }
