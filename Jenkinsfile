@@ -6,7 +6,6 @@ def PowerShellWrapper(psCmd) {
 
 pipeline {
     parameters {        
-        file(description: 'What environment?', name: 'HELLO', file: "test/myfile.zip")
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
         // choices are newline separated
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
@@ -21,28 +20,17 @@ pipeline {
       label 'meta_slave'
     }
   }
-  stages {
     stage('SStage') {
+         
+      node {
+      label 'hyper-v'
+    }
         steps {
-           sh "ls $WORKSPACE"
-           sh "cat $HELLO"
+           powershell "ls $WORKSPACE"
+           
         }
-    }  
-    stage('Parallel Stage') {
-            parallel {
-                stage('Branch A') {
-                    steps {
-                        echo env.REGION
-                        echo "On Branch A"
-                    }
-                }
-                stage('Branch B') {
-                    steps {
-                        echo "On Branch B"
-                    }
-                }
-            }
-        }
+    }
+    
     stage('Build') {
       steps {
           sh 'echo ${BRANCH_NAME}'
