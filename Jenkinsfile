@@ -44,7 +44,7 @@ pipeline {
         }
     }
            
-           stage('SStage') {
+           stage('SStage1') {
         agent{
       node {
       label 'hyper-v'
