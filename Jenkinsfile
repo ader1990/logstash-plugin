@@ -20,6 +20,7 @@ pipeline {
       label 'meta_slave'
     }
   }
+  stages{
     stage('SStage') {
          
       node {
@@ -31,26 +32,6 @@ pipeline {
         }
     }
     
-    stage('Build') {
-      steps {
-          sh 'echo ${BRANCH_NAME}'
-          sh "echo ${env.BRANCH_NAME}"
-        
-        ansiColor(colorMapName: 'XTerm') {
-          sh '''echo \'1\'
-echo $(test1)'''
-        }
-        
-        input(message: 'test', id: '1', ok: '1')
-      }
-      post {
-        success {
-          archiveArtifacts 'target/*.hpi,target/*.jpi'
-          
-        }
-        
-      }
-    }
     stage('Test') {
       steps {
         sh './tools/test.sh'
