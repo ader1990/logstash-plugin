@@ -22,6 +22,7 @@ pipeline {
   }
   
   stages{
+       parallel {
     stage('SStage') {
         agent{
       node {
@@ -41,6 +42,27 @@ pipeline {
            
         }
     }
+           
+           stage('SStage') {
+        agent{
+      node {
+      label 'hyper-v'
+    }
+    }
+        steps {
+           powershell "ls $WORKSPACE"
+            powershell '''
+            $max=10
+            while ($max -gt 0) {
+                $max = $max -1
+                Start-Sleep 1
+                Write-Host (Get-Date)
+            }
+            '''
+           
+        }
+    }
+       }
     
     stage('Test') {
       steps {
