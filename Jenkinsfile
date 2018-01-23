@@ -37,7 +37,7 @@ pipeline {
             while ($max -gt 0) {
                 $max = $max -1
                 Start-Sleep 1
-                Write-Host (Get-Date)
+                Write-Output (Get-Date)
             }
             '''
            
