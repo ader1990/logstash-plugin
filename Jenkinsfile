@@ -35,6 +35,7 @@ pipeline {
       steps {
           sh 'echo ${BRANCH_NAME}'
           sh "echo ${env.BRANCH_NAME}"
+          sh "echo ${env.BRANCH_NAME}"
         
         ansiColor(colorMapName: 'XTerm') {
           sh '''echo \'1\'
