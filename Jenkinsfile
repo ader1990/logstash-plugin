@@ -25,6 +25,11 @@ pipeline {
       stage('validation') {
        parallel {
     stage('SStage') {
+        when {
+                beforeAgent(true')
+                expression { params.OS_TYPE == 'ubuntu' }
+                expression { params.ENABLED_STAGES.contains('build_artifacts') }
+              }
         agent{
       node {
       label 'hyper-v'
