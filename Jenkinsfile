@@ -6,7 +6,7 @@ def PowerShellWrapper(psCmd) {
 
 pipeline {
     parameters {        
-        string(defaultValue: "TEST", description: 'What environment?\n http://hello test<br/> <pre><test></pre> \n Hello', name: 'userFlag')
+        string(defaultValue: "TEST", description: 'Valid examples: \n scp://my-scp-hostname:/home/my-username/patch.p1 \n scp://my-username@my-scp-hostname:/home/my-username/patch.p1 \n http://my-website.com/patch.p1 \n Use the space separator for multiple patches.', name: 'userFlag')
         // choices are newline separated
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
     }
