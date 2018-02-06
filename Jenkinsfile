@@ -6,7 +6,7 @@ def PowerShellWrapper(psCmd) {
 
 pipeline {
     parameters {        
-        string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
+        string(defaultValue: "TEST", description: 'What environment?\n http://hello \n Hello', name: 'userFlag')
         // choices are newline separated
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
     }
